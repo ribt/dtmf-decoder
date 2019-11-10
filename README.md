@@ -1,5 +1,5 @@
 # find-dtmf
-(sorry for my english, I'm French, not dumb)
+(sorry for my english, I'm not dumb but French)
 
 You always dreamt to find the phone number dialled by someone in a video? It's now possible! You have to record the audio of the *beeps* and this script will extract phone numbers from the dial tones.
 
