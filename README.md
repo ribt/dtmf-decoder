@@ -26,4 +26,4 @@ git clone https://github.com/ribt/find-dtmf/
 cd find-dtmf
 chmod +x find-dtmf.py
 sudo cp find-dtmf.py /usr/local/bin/find-dtmf
-``
+```
