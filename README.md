@@ -3,6 +3,18 @@
 
 You always dreamt to find the phone number dialled by someone in a video? It's now possible! You have to record the audio of the *beeps* and this script will extract phone numbers from the dial tones.
 
+## Installation
+(If you are on Mac or Windows, go to hell.)
+
+```
+git clone https://github.com/ribt/find-dtmf/
+cd find-dtmf
+chmod +x find-dtmf.py
+sudo cp find-dtmf.py /usr/local/bin/find-dtmf
+```
+
+## Usage
+
 You have to give a wav file (you can try to convert it with `ffmpeg -i audio.mp3 audio.wav` for example).
 
 ```
@@ -16,14 +28,4 @@ optional arguments:
   -d, --debug    show graphs to debug
   -t F           acceptable frequency error (in hertz, 20 by default)
   -i T           process by T seconds intervals (0.05 by default)
-```
-
-## Installation
-(If you are on Mac or Windows, go to hell.)
-
-```
-git clone https://github.com/ribt/find-dtmf/
-cd find-dtmf
-chmod +x find-dtmf.py
-sudo cp find-dtmf.py /usr/local/bin/find-dtmf
 ```
