@@ -1,7 +1,7 @@
 # find-dtmf
 (sorry for my english, I'm French, not dumb)
 
-You always dream to find the phone number composed by someone in a video? It's now possible! You have to record the audio of the *beeps* and this script will extract phone numbers from the dial tones.
+You always dreamt to find the phone number dialled by someone in a video? It's now possible! You have to record the audio of the *beeps* and this script will extract phone numbers from the dial tones.
 
 You have to give a wav file (you can try to convert it with `ffmpeg -i audio.mp3 audio.wav` for example).
 
