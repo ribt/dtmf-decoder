@@ -8,8 +8,6 @@ You have to give a wav file (you can try to convert it with `ffmpeg -i audio.mp3
 ```
 Usage: find-dtmf.py [-h] [-v] [-l] [-r] [-d] [-t F] [-i T] file.wav
 
-Extract phone numbers from an audio recording of the dial tones.
-
 optional arguments:
   -h, --help     show this help message and exit
   -v, --verbose  show a complete timeline
