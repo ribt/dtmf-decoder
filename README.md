@@ -6,7 +6,7 @@ You always dreamt to find the phone number dialled by someone in a video? It's n
 You have to give a wav file (you can try to convert it with `ffmpeg -i audio.mp3 audio.wav` for example).
 
 ```
-Usage: find-dtmf.py [-h] [-v] [-l] [-r] [-d] [-t F] [-i T] file.wav
+Usage: find-dtmf [-h] [-v] [-l] [-r] [-d] [-t F] [-i T] file.wav
 
 optional arguments:
   -h, --help     show this help message and exit
@@ -17,3 +17,13 @@ optional arguments:
   -t F           acceptable frequency error (in hertz, 20 by default)
   -i T           process by T seconds intervals (0.05 by default)
 ```
+
+## Installation
+(If you are on Mac or Windows, go to hell.)
+
+```
+git clone https://github.com/ribt/find-dtmf/
+cd find-dtmf
+chmod +x find-dtmf.py
+sudo cp find-dtmf.py /usr/local/bin/find-dtmf
+``
