@@ -1,5 +1,5 @@
 # DTMF decoder
-(Sorry for my english, I'm not dumb but French. Feel free to make a PR to correct this README.)
+(Sorry for my English, I'm not dumb but French. Feel free to make a PR to correct this README.)
 
 You always dreamt to find the phone number dialled by someone in a video? It's now possible! You have to record the audio of the *beeps* and this script will extract phone numbers from the dial tones.
 
