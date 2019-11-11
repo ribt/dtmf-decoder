@@ -7,10 +7,10 @@ You always dreamt to find the phone number dialled by someone in a video? It's n
 (If you are on Mac or Windows, go to hell.)
 
 ```
-git clone https://github.com/ribt/dtmf-decoder/
-cd dtmf-decoder
-chmod +x dtmf.py
-sudo cp dtmf.py /usr/local/bin/dtmf
+$ git clone https://github.com/ribt/dtmf-decoder/
+$ cd dtmf-decoder
+$ chmod +x dtmf.py
+$ sudo cp dtmf.py /usr/local/bin/dtmf
 ```
 
 ## Usage
@@ -38,19 +38,19 @@ You can test this script with these examples :
 
 #### The perfect case
 
-```shell
+```
 $ dtmf perfect-example.wav
 0123456789
 ```
 As you can see it works perfectly, we have a classical French phone number.
 
 #### The non-perfect case
-```shell
+```
 $ dtmf not-perfect-example.wav
 012374526789
 ```
 We can guess there is a problem because we have more than ten numbers. So try the verbose output:
-```shell
+```
 $ dtmf -v not-perfect-example.wav
 0:00 ...................0
 0:01 0..........1111.....
@@ -63,7 +63,7 @@ $ dtmf -v not-perfect-example.wav
 0:08 .................
 ```
 We can guess there are false positives so try to decrease the tolerance:
-```shell
+```
 $ dtmf -v -t 10 not-perfect-example.wav 
 0:00 ...................0
 0:01 0..........111......
