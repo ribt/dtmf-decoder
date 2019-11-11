@@ -33,8 +33,8 @@ optional arguments:
 ## Examples
 
 You can test this script with these examples :
-- [a perfect file without noise](perfect-example.wav)
-- [a non-perfect file with noise](not-perfect-example.wav)
+- [a perfect file without noise](https://github.com/ribt/find-dtmf/blob/master/perfect-example.wav?raw=true)
+- [a non-perfect file with noise](https://github.com/ribt/find-dtmf/blob/master/not-perfect-example.wav?raw=true)
 
 #### The perfect case
 
