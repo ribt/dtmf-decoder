@@ -39,29 +39,43 @@ You can test this script with these examples :
 #### The perfect case
 
 ```shell
-$ dtmf perfect-example.wav 
-0234567891
+$ dtmf perfect-example.wav
+0123456789
 ```
 As you can see it works perfectly, we have a classical French phone number.
 
 #### The non-perfect case
 ```shell
-$ dtmf not-perfect-example.wav 
-023456678991
+$ dtmf not-perfect-example.wav
+012374526789
 ```
-We can guess there is a problem because we have more than ten numbers. So try the verbose output :
+We can guess there is a problem because we have more than ten numbers. So try the verbose output:
 ```shell
-$ dtmf -v not-perfect-example.wav 
-0:00 ....................
-0:01 ............00......
-0:02 ...22.........33....
-0:03 ...44444....55......
-0:04 666.6....7777.....88
-0:05 888....999.9......11
-0:06 ....................
-0:07 .......
+$ dtmf -v not-perfect-example.wav
+0:00 ...................0
+0:01 0..........1111.....
+0:02 .....222............
+0:03 33........7.......44
+0:04 .......5..........2.
+0:05 .66666............77
+0:06 777.............888.
+0:07 ..........99........
+0:08 .................
 ```
-And we can guess the number `6` and the number `9` had been split into two.
+We can guess there are false positives so try to decrease the tolerance:
+```shell
+$ dtmf -v -t 10 not-perfect-example.wav 
+0:00 ...................0
+0:01 0..........111......
+0:02 .....222............
+0:03 3..................4
+0:04 .......5............
+0:05 ..66.6..............
+0:06 7...............88..
+0:07 ...........9........
+0:08 .................
+```
+The number `6` must have been split into two so the number is `0123456789`.
 
 ## How it works
 
