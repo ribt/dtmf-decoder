@@ -29,3 +29,36 @@ optional arguments:
   -t F           acceptable frequency error (in hertz, 20 by default)
   -i T           process by T seconds intervals (0.05 by default)
 ```
+
+## Examples
+
+You can test this script with these examples :
+- [a perfect file without noise](perfect-example.wav)
+- [a non-perfect file with noise](not-perfect-example.wav)
+
+#### The perfect case
+
+```shell
+$ find-dtmf perfect-example.wav 
+0234567891
+```
+As you can see it works perfectly, we have a classical French phone number.
+
+#### The non-perfect case
+```shell
+$ find-dtmf not-perfect-example.wav 
+023456678991
+```
+We can guess there is a problem because we have more than ten numbers. So try the verbose output :
+```shell
+$ find-dtmf -v not-perfect-example.wav 
+0:00 ....................
+0:01 ............00......
+0:02 ...22.........33....
+0:03 ...44444....55......
+0:04 666.6....7777.....88
+0:05 888....999.9......11
+0:06 ....................
+0:07 .......
+```
+And we can guess the number `6` and the number `9` had been split into two.
