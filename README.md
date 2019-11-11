@@ -81,7 +81,7 @@ The number `6` must have been split into two so the number is `0123456789`.
 
 This script is quite simple. We split the signal into frames and we analyse them one by one. We calculate a Fast Fourier Transorm to find its constituent frequencies. We find the frequencies with the bigger amplitude and we compare them with the DTMF's (dual-tone multi-frequency) frequencies.
 
-Dial tones' frequencies from Wikipedia:
+DTMF keypad frequencies from Wikipedia:
 
 ![array of dial tones' frequencies from Wikipedia](./dtmf-wikipedia.png "Dial tones' frequencies")
 
