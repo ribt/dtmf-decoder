@@ -62,3 +62,17 @@ $ find-dtmf -v not-perfect-example.wav
 0:07 .......
 ```
 And we can guess the number `6` and the number `9` had been split into two.
+
+## How it works
+
+This script is quite simple. We split the signal into frames and we analyse them one by one. We calculate a Fast Fourier Transorm to find its constituent frequencies. We find the frequencies with the bigger amplitude and we compare them with the DTMF's (dual-tone multi-frequency) frequencies.
+
+Dual tone frequencies from Wikipedia:
+
+![Dual tone frequencies from Wikipedia](./dtmf-wikipedia.png "Dual tone frequencies from Wikipedia")
+
+Graph explaining the functioning :
+
+![graphs](./graphs.png)
+
+
