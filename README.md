@@ -7,6 +7,7 @@ You always dreamt to find the phone number dialled by someone in a video? It's n
 (If you are on Mac or Windows, go to hell.)
 
 ```
+$ sudo pip3 install numpy matplotlib scipy
 $ git clone https://github.com/ribt/dtmf-decoder/
 $ cd dtmf-decoder
 $ chmod +x dtmf.py
