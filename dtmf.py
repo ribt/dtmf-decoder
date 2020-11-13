@@ -22,33 +22,37 @@ args = parser.parse_args()
 
 
 file = args.file.name
-try : fps, data = wavfile.read(file)
-except FileNotFoundError :
+try:
+    fps, data = wavfile.read(file)
+except FileNotFoundError:
     print ("No such file:", file)
     exit()
-except ValueError :
+except ValueError:
     print ("Impossible to read:", file)
     print("Please give a wav file.")
     exit()
 
 
-if args.left and not args.right :
-    if len(data.shape) == 2 and data.shape[1] == 2 : data = np.array([i[0] for i in data])
-    elif len(data.shape) == 1 :
+if args.left and not args.right:
+    if len(data.shape) == 2 and data.shape[1] == 2:
+        data = np.array([i[0] for i in data])
+    elif len(data.shape) == 1:
         print ("Warning: The sound is mono so the -l option was ignored.")
-    else :
+    else:
         print ("Warning: The sound is not mono and not stereo ("+str(data.shape[1])+"canals)... so the -l option was ignored.")
 
 
-elif args.right and not args.left :
-    if len(data.shape) == 2 and data.shape[1] == 2 : data = np.array([i[1] for i in data])
-    elif len(data.shape) == 1 :
+elif args.right and not args.left:
+    if len(data.shape) == 2 and data.shape[1] == 2:
+        data = np.array([i[1] for i in data])
+    elif len(data.shape) == 1:
         print ("Warning: the sound is mono so the -r option was ignored.")
-    else :
+    else:
         print ("Warning: The sound is not mono and not stereo ("+str(data.shape[1])+"canals)... so the -r option was ignored.")
 
-else :
-    if len(data.shape) == 2 : data = data.sum(axis=1) # stereo
+else:
+    if len(data.shape) == 2: 
+        data = data.sum(axis=1) # stereo
 
 precision = args.i
 
@@ -60,100 +64,109 @@ debug = args.debug
 verbose = args.verbose
 c = ""
 
-if debug : print("Warning: The debug mode is very uncomfortable, feel free to kill the process because CTRL+C will not work.")
+if debug:
+    print("Warning:\nThe debug mode is very uncomfortable: you need to close each window to continue.\nFeel free to kill the process doing CTRL+C and then close the window.\n")
 
-if verbose : print ("0:00 ", end='', flush=True)
-for i in range(0, len(data)-step, step) :
-    signal = data[i:i+step]
+if verbose:
+    print ("0:00 ", end='', flush=True)
 
-    if debug :
-        plt.subplot(311)
-        plt.subplots_adjust(hspace=0.5)
-        plt.title("audio (entire signal)")
-        plt.plot(data)
-        plt.xticks([])
-        plt.yticks([])
-        plt.axvline(x=i, linewidth=1, color='red')
-        plt.axvline(x=i+step, linewidth=1, color='red')
-        plt.subplot(312)
-        plt.title("analysed frame")
-        plt.plot(signal)
-        plt.xticks([])
-        plt.yticks([])
-    fourier = np.fft.fft(signal)
-    frequencies = np.fft.fftfreq(signal.size, d=1/fps)
+try:
+    for i in range(0, len(data)-step, step):
+        signal = data[i:i+step]
 
-    # Low
-    debut = np.where(frequencies > 0)[0][0]
-    fin = np.where(frequencies > 1050)[0][0]
-    
-    freq = frequencies[debut:fin]
-    amp = abs(fourier.real[debut:fin])
+        if debug:
+            plt.subplot(311)
+            plt.subplots_adjust(hspace=0.5)
+            plt.title("audio (entire signal)")
+            plt.plot(data)
+            plt.xticks([])
+            plt.yticks([])
+            plt.axvline(x=i, linewidth=1, color='red')
+            plt.axvline(x=i+step, linewidth=1, color='red')
+            plt.subplot(312)
+            plt.title("analysed frame")
+            plt.plot(signal)
+            plt.xticks([])
+            plt.yticks([])
+        fourier = np.fft.fft(signal)
+        frequencies = np.fft.fftfreq(signal.size, d=1/fps)
 
-    lf = freq[np.where(amp == max(amp))[0][0]]
+        # Low
+        debut = np.where(frequencies > 0)[0][0]
+        fin = np.where(frequencies > 1050)[0][0]
+        
+        freq = frequencies[debut:fin]
+        amp = abs(fourier.real[debut:fin])
 
-    delta = args.t
-    best = 0
+        lf = freq[np.where(amp == max(amp))[0][0]]
 
-    for f in [697, 770, 852, 941] :
-        if abs(lf-f) < delta :
-            delta = abs(lf-f)
-            best = f
+        delta = args.t
+        best = 0
 
-    if debug :
-        plt.subplot(313)
-        plt.title("Fourier transform")
-        plt.plot(freq, amp)
-        plt.yticks([])
-        plt.annotate(str(int(lf))+"Hz", xy=(lf, max(amp)))
+        for f in [697, 770, 852, 941]:
+            if abs(lf-f) < delta:
+                delta = abs(lf-f)
+                best = f
 
-    lf = best
+        if debug:
+            plt.subplot(313)
+            plt.title("Fourier transform")
+            plt.plot(freq, amp)
+            plt.yticks([])
+            plt.annotate(str(int(lf))+"Hz", xy=(lf, max(amp)))
 
-    # High
-    debut = np.where(frequencies > 1100)[0][0]
-    fin = np.where(frequencies > 2000)[0][0]
+        lf = best
 
-    freq = frequencies[debut:fin]
-    amp = abs(fourier.real[debut:fin])
+        # High
+        debut = np.where(frequencies > 1100)[0][0]
+        fin = np.where(frequencies > 2000)[0][0]
 
-    hf = freq[np.where(amp == max(amp))[0][0]]
+        freq = frequencies[debut:fin]
+        amp = abs(fourier.real[debut:fin])
 
-    delta = args.t
-    best = 0
+        hf = freq[np.where(amp == max(amp))[0][0]]
 
-    for f in [1209, 1336, 1477, 1633] :
-        if abs(hf-f) < delta :
-            delta = abs(hf-f)
-            best = f
+        delta = args.t
+        best = 0
 
-    if debug :
-        plt.plot(freq, amp)
-        plt.annotate(str(int(hf))+"Hz", xy=(hf, max(amp)))
+        for f in [1209, 1336, 1477, 1633]:
+            if abs(hf-f) < delta:
+                delta = abs(hf-f)
+                best = f
 
-    hf = best
+        if debug:
+            plt.plot(freq, amp)
+            plt.annotate(str(int(hf))+"Hz", xy=(hf, max(amp)))
 
-    if debug :
-        if lf == 0 or hf == 0 : txt = "Unknow dial tone"
-        else : txt = str(lf)+"Hz + "+str(hf)+"Hz -> "+dtmf[(lf,hf)]
-        plt.xlabel(txt)
+        hf = best
+
+        if debug:
+            if lf == 0 or hf == 0:
+                txt = "Unknown dial tone"
+            else: txt = str(lf)+"Hz + "+str(hf)+"Hz -> "+dtmf[(lf,hf)]
+            plt.xlabel(txt)
 
 
-    t = int(i//step * precision)
+        t = int(i//step * precision)
 
-    if verbose and t > int((i-1)//step * precision) :
-        m = str(int(t//60))
-        s = str(t%60)
-        s = "0"*(2-len(s)) + s
-        print ("\n"+m+":"+s+" ", end='', flush=True)
+        if verbose and t > int((i-1)//step * precision):
+            m = str(int(t//60))
+            s = str(t%60)
+            s = "0"*(2-len(s)) + s
+            print ("\n"+m+":"+s+" ", end='', flush=True)
 
-    if lf == 0 or hf == 0 :
-        if verbose : print(".", end='', flush=True)
-        c = ""
-    elif dtmf[(lf,hf)] != c or verbose :
-        c = dtmf[(lf,hf)]
-        print(c, end='', flush=True)
+        if lf == 0 or hf == 0:
+            if verbose:
+                print(".", end='', flush=True)
+            c = ""
+        elif dtmf[(lf,hf)] != c or verbose:
+            c = dtmf[(lf,hf)]
+            print(c, end='', flush=True)
 
-    if debug :
-        plt.show()
+        if debug:
+            plt.show()
 
-print()
+    print()
+
+except KeyboardInterrupt:
+    print("\nCTRL+C detected: exiting...")
