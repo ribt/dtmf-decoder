@@ -8,8 +8,8 @@ You always dreamt to find the phone number dialled by someone in a video? It's n
 
 ```
 $ git clone https://github.com/ribt/dtmf-decoder/
-$ sudo python3 -m pip3 install -r requirements.txt --upgrade
 $ cd dtmf-decoder
+$ sudo python3 -m pip3 install -r requirements.txt --upgrade
 $ chmod +x dtmf.py
 $ sudo cp dtmf.py /usr/local/bin/dtmf
 ```
