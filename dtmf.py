@@ -88,15 +88,17 @@ try:
             plt.plot(signal)
             plt.xticks([])
             plt.yticks([])
-        fourier = np.fft.fft(signal)
+        
+        
         frequencies = np.fft.fftfreq(signal.size, d=1/fps)
+        amplitudes = np.fft.fft(signal)
 
         # Low
-        debut = np.where(frequencies > 0)[0][0]
-        fin = np.where(frequencies > 1050)[0][0]
+        i_min = np.where(frequencies > 0)[0][0]
+        i_max = np.where(frequencies > 1050)[0][0]
         
-        freq = frequencies[debut:fin]
-        amp = abs(fourier.real[debut:fin])
+        freq = frequencies[i_min:i_max]
+        amp = abs(amplitudes.real[i_min:i_max])
 
         lf = freq[np.where(amp == max(amp))[0][0]]
 
@@ -118,11 +120,11 @@ try:
         lf = best
 
         # High
-        debut = np.where(frequencies > 1100)[0][0]
-        fin = np.where(frequencies > 2000)[0][0]
+        i_min = np.where(frequencies > 1100)[0][0]
+        i_max = np.where(frequencies > 2000)[0][0]
 
-        freq = frequencies[debut:fin]
-        amp = abs(fourier.real[debut:fin])
+        freq = frequencies[i_min:i_max]
+        amp = abs(amplitudes.real[i_min:i_max])
 
         hf = freq[np.where(amp == max(amp))[0][0]]
 
@@ -143,7 +145,8 @@ try:
         if debug:
             if lf == 0 or hf == 0:
                 txt = "Unknown dial tone"
-            else: txt = str(lf)+"Hz + "+str(hf)+"Hz -> "+dtmf[(lf,hf)]
+            else:
+                txt = str(lf)+"Hz + "+str(hf)+"Hz -> "+dtmf[(lf,hf)]
             plt.xlabel(txt)
 
 
