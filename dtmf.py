@@ -39,7 +39,7 @@ if args.left and not args.right:
     elif len(data.shape) == 1:
         print ("Warning: The sound is mono so the -l option was ignored.")
     else:
-        print ("Warning: The sound is not mono and not stereo ("+str(data.shape[1])+"canals)... so the -l option was ignored.")
+        print ("Warning: The sound is not mono and not stereo ("+str(data.shape[1])+" canals)... so the -l option was ignored.")
 
 
 elif args.right and not args.left:
@@ -48,7 +48,7 @@ elif args.right and not args.left:
     elif len(data.shape) == 1:
         print ("Warning: the sound is mono so the -r option was ignored.")
     else:
-        print ("Warning: The sound is not mono and not stereo ("+str(data.shape[1])+"canals)... so the -r option was ignored.")
+        print ("Warning: The sound is not mono and not stereo ("+str(data.shape[1])+" canals)... so the -r option was ignored.")
 
 else:
     if len(data.shape) == 2: 
