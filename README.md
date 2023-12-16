@@ -4,7 +4,9 @@
 Have you always dreamt of finding the phone number dialled by someone in a video? It's possible now! All you have to do is record the audio of the *beeps* and this script will extract the phone number for you from the dial tones.
 
 ## Installation
-(If you are on Mac or Windows, go to hell.)
+
+> If you are on MacOS or Windows you can use either a VM or WSL to proceed. <br>
+> Learn more about [VMs](https://developer.apple.com/documentation/virtualization/creating_and_running_a_linux_virtual_machine) or [WSL](https://learn.microsoft.com/en-us/windows/wsl/install).
 
 ```
 $ git clone https://github.com/ribt/dtmf-decoder.git
